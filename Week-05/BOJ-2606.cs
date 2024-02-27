@@ -18,16 +18,19 @@ namespace Week_05
 
         static int count;
 
-        static public int[,] map = new int[101, 101];
-        static public bool[] visited = new bool[101];
+        static public int[,] map;
+        static public bool[] visited;
 
         static public Queue<int> queue = new Queue<int>();
 
 
-        static void Main1(string[] args)
+        static void Main(string[] args)
         {
             N = int.Parse(Console.ReadLine()!);
             M = int.Parse(Console.ReadLine()!);
+
+            map = new int[N+1, N+1];
+            visited = new bool[N+1];
 
             for (int i = 0; i < M; i++)
             {
