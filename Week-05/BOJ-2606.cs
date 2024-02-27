@@ -40,18 +40,9 @@ namespace Week_05
                 map[x,y] = 1;
                 map[y,x] = 1;
             }
-
-            initalize();
+            visited = Enumerable.Repeat(false, N + 1).ToArray();
             BFS();
             Console.WriteLine(count - 1);
-        }
-
-        static void initalize()
-        {
-            for (int i = 1; i <= N; i++)
-            {
-                visited[i] = false;
-            }
         }
 
         static void BFS()
