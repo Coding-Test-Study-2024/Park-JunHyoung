@@ -15,6 +15,9 @@ namespace Week_05
         static bool[,] map;
         static bool[] visited;
 
+        static StringBuilder DFSResult = new StringBuilder();
+        static StringBuilder BFSResult = new StringBuilder();
+
         static void Main1()
         {
             string[] inputNMV = Console.ReadLine()!.Split();
@@ -35,6 +38,12 @@ namespace Week_05
             }
 
             InitVisited();
+            DFS();
+            InitVisited();
+            BFS();
+
+            Console.WriteLine(DFSResult.ToString());
+            Console.WriteLine(BFSResult.ToString());
 
         }
 
