@@ -44,7 +44,6 @@ namespace Week_05
 
             Console.WriteLine(DFSResult.ToString());
             Console.WriteLine(BFSResult.ToString());
-
         }
 
         static void InitVisited()

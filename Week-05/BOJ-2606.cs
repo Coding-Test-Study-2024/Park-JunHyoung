@@ -24,7 +24,7 @@ namespace Week_05
         static public Queue<int> queue = new Queue<int>();
 
 
-        static void Main(string[] args)
+        static void Main1(string[] args)
         {
             N = int.Parse(Console.ReadLine()!);
             M = int.Parse(Console.ReadLine()!);
