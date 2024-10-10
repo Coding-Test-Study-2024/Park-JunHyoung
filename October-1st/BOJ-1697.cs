@@ -10,7 +10,7 @@ namespace October_1st
 {
     internal class BOJ_1697
     {
-        const int MAXIMUMCASE = 1000000;
+        const int MAXIMUMCASE = 100000;// 100,000
 
         public void Main()
         {

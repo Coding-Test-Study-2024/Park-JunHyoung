@@ -12,31 +12,25 @@ namespace October_1st
     {
         void Main()
         {
-            string[] input = Console.ReadLine().Split();
+            string[] input = Console.ReadLine()!.Split();
 
             int peopleNotHeardCount = int.Parse(input[0]);
             int peopleNotSeenCount = int.Parse(input[1]);
 
-            string[] peopleNotHeard = new string[peopleNotHeardCount];
-            string[] peopleNotSeen = new string[peopleNotSeenCount];
+            HashSet<string> peopleNotHeard = new HashSet<string>();
+            //string[] peopleNotSeen = new string[peopleNotSeenCount];
 
             for (int i = 0; i < peopleNotHeardCount; i++)
             {
-                peopleNotHeard[i] = Console.ReadLine();
+                peopleNotHeard.Add(Console.ReadLine()!);
             }
 
+            List<string> peopleNotHeardNotSeen = new List<string>();
             for (int i = 0; i < peopleNotSeenCount; i++)
             {
-                peopleNotSeen[i] = Console.ReadLine();
-            }
+                string people = Console.ReadLine()!;
 
-            HashSet<string> peopleNotHeardSet = new HashSet<string>(peopleNotHeard);
-            List<string> peopleNotHeardNotSeen = new List<string>();
-
-
-            foreach (string people in peopleNotSeen)
-            {
-                if (!peopleNotHeardSet.Add(people)) // 보지 못한 사람 셋에 추가가 안됨 == 중복임 == 듣도 보도 못한 사람임
+                if (!peopleNotHeard.Add(people)) // 보지 못한 사람 셋에 추가가 안됨 == 중복임 == 듣도 보도 못한 사람임
                 {
                     peopleNotHeardNotSeen.Add(people);
                 }
