@@ -6,8 +6,8 @@
     internal class BOJ25343
     {
         static int N;
-
-        static List<List<int>> paths = new List<List<int>>();
+        static int MAX = int.MinValue;
+        //static List<List<int>> paths = new List<List<int>>();
 
         static void Main()
         {
@@ -30,8 +30,9 @@
             currentPath.Add(grid[0,0]);
             FindPaths(grid, 0, 0, currentPath);
 
-
+            
             // 3. Find LIS
+            /*
             int max = int.MinValue;
             foreach(List<int> path in paths)
             {
@@ -41,9 +42,9 @@
                 {
                     max = lisLenght;
                 }
-            }
+            }*/
 
-            Console.WriteLine(max);
+            Console.WriteLine(MAX);
         }
 
         static void FindPaths(int[,] grid, int i, int j, List<int> currentPath)
@@ -51,7 +52,11 @@
             if (i == N - 1 && j == N - 1)
             {
                 //N,N 도달시 저장
-                paths.Add(new List<int>(currentPath));
+                //paths.Add(new List<int>(currentPath));
+
+                int LIS = GetLISLength(currentPath);
+                if( LIS > MAX )
+                    MAX = LIS;
                 return;
             }
 
