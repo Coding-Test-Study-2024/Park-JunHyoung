@@ -6,8 +6,6 @@
     internal class BOJ25343
     {
         static int N;
-        static int MAX = int.MinValue;
-        //static List<List<int>> paths = new List<List<int>>();
 
         static void Main()
         {
@@ -15,7 +13,7 @@
 
             int[,] grid = new int[N, N];
 
-            // 1. Init grid 
+            // Init grid 
             for(int i=0; i<N; i++)
             {
                 string[] input = Console.ReadLine()!.Split();
@@ -25,86 +23,58 @@
                     grid[i,j] = int.Parse(input[j]);
                 }
             }
-            // 2. Find all Paths
-            List<int> currentPath = new List<int>();
-            currentPath.Add(grid[0,0]);
-            FindPaths(grid, 0, 0, currentPath);
 
-            
-            // 3. Find LIS
-            /*
-            int max = int.MinValue;
-            foreach(List<int> path in paths)
+            // Init DP
+            int[,] dp = new int[N, N];
+            for (int i = 0; i < N; i++)
             {
-                int lisLenght = GetLISLength(path);
-
-                if( lisLenght > max)
+                for (int j = 0; j < N; j++)
                 {
-                    max = lisLenght;
+                    dp[i, j] = 1;
                 }
-            }*/
-
-            Console.WriteLine(MAX);
-        }
-
-        static void FindPaths(int[,] grid, int i, int j, List<int> currentPath)
-        {
-            if (i == N - 1 && j == N - 1)
-            {
-                //N,N 도달시 저장
-                //paths.Add(new List<int>(currentPath));
-
-                int LIS = GetLISLength(currentPath);
-                if( LIS > MAX )
-                    MAX = LIS;
-                return;
             }
 
-            if (j < N - 1)
+            for (int i = 0; i < N; i++)
             {
-                // 오른쪽으로 이동
-                currentPath.Add(grid[i, j + 1]);
-                FindPaths(grid, i, j + 1, currentPath);
-                currentPath.RemoveAt(currentPath.Count - 1);
-            }
-
-            if (i < N - 1)
-            {
-                // 아래쪽으로 이동
-                currentPath.Add(grid[i + 1, j]);
-                FindPaths(grid, i + 1, j, currentPath);
-                currentPath.RemoveAt(currentPath.Count - 1);
-            }
-        }
-
-
-        static int GetLISLength(List<int> array)
-        {
-            if (array.Count <= 1)
-            {
-                return 1;
-            }
-
-            List<int> LIS = new List<int>();
-
-            foreach (int num in array)
-            {
-                int index = LIS.BinarySearch(num);
-
-                if (index < 0)
-                    index = ~index;
-
-                if (index == LIS.Count)
+                for (int j = 0; j < N; j++)
                 {
-                    LIS.Add(num); // 끝이면 추가
+                    // 왼쪽에서 오는 경우
+                    if (j > 0)
+                    {
+                        if (grid[i, j - 1] < grid[i, j])
+                        {
+                            dp[i, j] = Math.Max(dp[i, j], dp[i, j - 1] + 1);
+                        }
+                        else
+                        {
+                            dp[i, j] = Math.Max(dp[i, j], dp[i, j - 1]);
+                        }
+                    }
+                    // 위쪽에서 오는 경우
+                    if (i > 0)
+                    {
+                        if (grid[i - 1, j] < grid[i, j])
+                        {
+                            dp[i, j] = Math.Max(dp[i, j], dp[i - 1, j] + 1);
+                        }
+                        else
+                        {
+                            dp[i, j] = Math.Max(dp[i, j], dp[i - 1, j]);
+                        }
+                    }
                 }
-                else
-                {
-                    LIS[index] = num; // 아니면 갱신
-                }
-
             }
-            return LIS.Count;
+
+            Console.WriteLine();
+            for (int  i = 0; i < N; i++)
+            {
+                for(int j = 0; j < N; j++)
+                {
+                    Console.Write($"{ dp[i, j]} ");
+                }Console.WriteLine();
+            }
+
+            Console.WriteLine(dp[N-1,N-1]);
         }
     }
 }
