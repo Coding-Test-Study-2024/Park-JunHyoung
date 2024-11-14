@@ -26,7 +26,7 @@
         {
             if (array.Count <= 1)
             {
-                Console.WriteLine(0);
+                Console.WriteLine(1);
                 return;
             }
 
